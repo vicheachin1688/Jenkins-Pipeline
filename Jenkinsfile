@@ -45,7 +45,7 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 echo "Deploying to staging"
-                echo "Tool: Custom deployment script (e.g., deploy-script.sh)"
+                echo "Tool: Custom deployment script"
                 // Example command for deployment (not executed here)
                 // sh 'deploy-script.sh staging'
             }
@@ -54,7 +54,7 @@ pipeline {
         stage('Integration Test on Staging') {
             steps {
                 echo "Integration testing on staging"
-                echo "Tool: Custom integration test script (e.g., integration-tests.sh)"
+                echo "Tool: Custom integration test script"
                 // Example command for integration testing (not executed here)
                 // Run integration tests on the staging environment to ensure the application functions as expected."
                 // sh 'integration-tests.sh'
