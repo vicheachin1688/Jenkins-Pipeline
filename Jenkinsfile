@@ -10,29 +10,7 @@ pipeline {
                 // sh 'mvn clean package'
             }
         }
-        
-        stage('Unit and Integration Tests') {
-            steps {
-                echo "Unit and integration testing!"
-                echo "Tools: use JUnit or TestNG for unit test"
-                // Example commands (not executed here)
-                // sh 'mvn test'
-            }
-            post {
-                success {
-                    mail to: "konellyskaishann@gmail.com",
-                        subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test successful."
-                }
-                failure{
-                    mail to: "konellyskaishann@gmail.com",
-                        subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test failed"
-                }
-            }
-        }
-        
-        stage('Code Analysis') {
+         stage('Code Analysis') {
             steps {
                 echo "Analyzing the code!"
                 echo "Tool: ESLint"
@@ -56,7 +34,7 @@ pipeline {
                         subject: "Security Scan",
                         body: "Security scan successful."
                 }
-                failure{
+                failure{ 
                     mail to: "chinsovatanakvichea@gmail.com",
                         subject: "Security Scan",
                         body: "Security scan failed"
@@ -103,3 +81,25 @@ pipeline {
         }
     }
 }
+        stage('Unit and Integration Tests') {
+            steps {
+                echo "Unit and integration testing!"
+                echo "Tools: use JUnit or TestNG for unit test"
+                // Example commands (not executed here)
+                // sh 'mvn test'
+            }
+            post {
+                success {
+                    mail to: "chinsovatanakvichea@gmail.com",
+                        subject: "Unit and Integration Tests",
+                        body: "Unit and Integration Test successful."
+                }
+                failure{
+                    mail to: "chinsovatanakvichea@gmail.com",
+                        subject: "Unit and Integration Tests",
+                        body: "Unit and Integration Test failed"
+                }
+            }
+        }
+        
+       
