@@ -20,20 +20,14 @@ pipeline {
             }
             post {
                 success {
-                    script {
-                        emailext to: "chinsovatanakvichea@gmail.com",
-                            subject: "Unit and Integration Tests",
-                            body: "Unit and Integration Test successful.",
-                            attachLog: true
-                    }
+                    emailext to: "chinsovatanakvichea@gmail.com",
+                        subject: "Unit and Integration Tests - Success",
+                        body: "Unit and Integration Tests were successful."
                 }
                 failure {
-                    script {
-                        emailext to: "chinsovatanakvichea@gmail.com",
-                            subject: "Unit and Integration Tests",
-                            body: "Unit and Integration Test failed",
-                            attachLog: true
-                    }
+                    emailext to: "chinsovatanakvichea@gmail.com",
+                        subject: "Unit and Integration Tests - Failure",
+                        body: "Unit and Integration Tests failed."
                 }
             }
         }
@@ -56,20 +50,14 @@ pipeline {
             }
             post {
                 success {
-                    script {
-                        emailext to: "chinsovatanakvichea@gmail.com",
-                            subject: "Security Scan",
-                            body: "Security scan successful.",
-                            attachLog: true
-                    }
+                    emailext to: "chinsovatanakvichea@gmail.com",
+                        subject: "Security Scan - Success",
+                        body: "Security scan was successful."
                 }
                 failure {
-                    script {
-                        emailext to: "chinsovatanakvichea@gmail.com",
-                            subject: "Security Scan",
-                            body: "Security scan failed",
-                            attachLog: true
-                    }
+                    emailext to: "chinsovatanakvichea@gmail.com",
+                        subject: "Security Scan - Failure",
+                        body: "Security scan failed."
                 }
             }
         }
@@ -104,10 +92,14 @@ pipeline {
 
     post {
         success {
-            echo "Pipeline completed successfully!"
+            emailext to: "chinsovatanakvichea@gmail.com",
+                subject: "Pipeline Success",
+                body: "The pipeline has completed successfully."
         }
         failure {
-            echo "Pipeline failed!"
+            emailext to: "chinsovatanakvichea@gmail.com",
+                subject: "Pipeline Failure",
+                body: "The pipeline has failed."
         }
     }
 }
