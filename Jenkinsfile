@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    options {
-        // Enable attaching logs to the email notifications
-        attachLog: true
-    }
-
     stages {
         stage('Build') {
             steps {
@@ -25,16 +20,20 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "chinsovatanakvichea@gmail.com",
-                        subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test successful.",
-                        attachLog: true
+                    script {
+                        emailext to: "chinsovatanakvichea@gmail.com",
+                            subject: "Unit and Integration Tests",
+                            body: "Unit and Integration Test successful.",
+                            attachLog: true
+                    }
                 }
                 failure {
-                    mail to: "chinsovatanakvichea@gmail.com",
-                        subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test failed",
-                        attachLog: true
+                    script {
+                        emailext to: "chinsovatanakvichea@gmail.com",
+                            subject: "Unit and Integration Tests",
+                            body: "Unit and Integration Test failed",
+                            attachLog: true
+                    }
                 }
             }
         }
@@ -57,16 +56,20 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "chinsovatanakvichea@gmail.com",
-                        subject: "Security Scan",
-                        body: "Security scan successful.",
-                        attachLog: true
+                    script {
+                        emailext to: "chinsovatanakvichea@gmail.com",
+                            subject: "Security Scan",
+                            body: "Security scan successful.",
+                            attachLog: true
+                    }
                 }
                 failure {
-                    mail to: "chinsovatanakvichea@gmail.com",
-                        subject: "Security Scan",
-                        body: "Security scan failed",
-                        attachLog: true
+                    script {
+                        emailext to: "chinsovatanakvichea@gmail.com",
+                            subject: "Security Scan",
+                            body: "Security scan failed",
+                            attachLog: true
+                    }
                 }
             }
         }
