@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    options {
+        // Enable attaching logs to the email notifications
+        attachLog: true
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -22,12 +27,14 @@ pipeline {
                 success {
                     mail to: "chinsovatanakvichea@gmail.com",
                         subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test successful."
+                        body: "Unit and Integration Test successful.",
+                        attachLog: true
                 }
                 failure {
                     mail to: "chinsovatanakvichea@gmail.com",
                         subject: "Unit and Integration Tests",
-                        body: "Unit and Integration Test failed"
+                        body: "Unit and Integration Test failed",
+                        attachLog: true
                 }
             }
         }
@@ -52,12 +59,14 @@ pipeline {
                 success {
                     mail to: "chinsovatanakvichea@gmail.com",
                         subject: "Security Scan",
-                        body: "Security scan successful."
+                        body: "Security scan successful.",
+                        attachLog: true
                 }
                 failure {
                     mail to: "chinsovatanakvichea@gmail.com",
                         subject: "Security Scan",
-                        body: "Security scan failed"
+                        body: "Security scan failed",
+                        attachLog: true
                 }
             }
         }
