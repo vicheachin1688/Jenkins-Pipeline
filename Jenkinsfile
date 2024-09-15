@@ -20,16 +20,16 @@ pipeline {
             }
             post {
                 success {
-                    emailext to: "chinsovatanakvichea@gmail.com",
+                    emailext attachLog: true,
+                        to: "chinsovatanakvichea@gmail.com",
                         subject: "Unit and Integration Tests - SUCCESS",
-                        body: "Unit and Integration Test was successful.",
-                        attachLog: true
+                        body: "Unit and Integration Test was successful."
                 }
                 failure {
-                    emailext to: "chinsovatanakvichea@gmail.com",
+                    emailext attachLog: true,
+                        to: "chinsovatanakvichea@gmail.com",
                         subject: "Unit and Integration Tests - FAILURE",
-                        body: "Unit and Integration Test failed.",
-                        attachLog: true
+                        body: "Unit and Integration Test failed."
                 }
             }
         }
@@ -52,16 +52,16 @@ pipeline {
             }
             post {
                 success {
-                    emailext to: "chinsovatanakvichea@gmail.com",
+                    emailext attachLog: true,
+                        to: "chinsovatanakvichea@gmail.com",
                         subject: "Security Scan - SUCCESS",
-                        body: "Security scan was successful.",
-                        attachLog: true
+                        body: "Security scan was successful."
                 }
                 failure {
-                    emailext to: "chinsovatanakvichea@gmail.com",
+                    emailext attachLog: true,
+                        to: "chinsovatanakvichea@gmail.com",
                         subject: "Security Scan - FAILURE",
-                        body: "Security scan failed.",
-                        attachLog: true
+                        body: "Security scan failed."
                 }
             }
         }
@@ -96,16 +96,16 @@ pipeline {
 
     post {
         success {
-            emailext to: "chinsovatanakvichea@gmail.com",
+            emailext attachLog: true,
+                to: "chinsovatanakvichea@gmail.com",
                 subject: "Pipeline Success",
-                body: "The pipeline has completed successfully.",
-                attachLog: true
+                body: "The pipeline has completed successfully."
         }
         failure {
-            emailext to: "chinsovatanakvichea@gmail.com",
+            emailext attachLog: true,
+                to: "chinsovatanakvichea@gmail.com",
                 subject: "Pipeline Failure",
-                body: "The pipeline has failed.",
-                attachLog: true
+                body: "The pipeline has failed."
         }
     }
 }
