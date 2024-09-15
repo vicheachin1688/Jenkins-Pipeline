@@ -1,113 +1,86 @@
 pipeline {
-    agent any
-
+    agent any 
     stages {
-        stage('Build') {
+        stage("Build") {
             steps {
-                echo "Building the code!"
-                echo "Tool: Maven"
-                // Example command for Maven (not executed here)
-                // sh 'mvn clean package'
+                echo "Build the code using a build automation tool to compile and package your code."
+                echo "Maven is a popular tool used for Java-based build automation that can handle dependency management, compilation, packaging, and testing."
+                echo "Gradle can become useful if you want to handle diverse languages."
             }
         }
-
-        stage('Unit and Integration Tests') {
+        stage("Unit and Integration Tests") {
             steps {
-                echo "Unit and integration testing!"
-                echo "Tools: use JUnit or TestNG for unit tests"
-                // Example command for unit and integration tests (not executed here)
-                // sh 'mvn test'
+                echo "Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected."
+                echo "JUnit is the popular Java framework used for unit testing and integration."
+                echo "If you are looking for something for web development, Selenium can be useful."
+            }
+        }
+        stage("Code Analysis") {
+            steps {
+                echo "Integrate a code analysis tool to analyze the code and ensure it meets industry standards."
+                echo "SonarQube can be useful in this case for continuous inspection of code quality and security."
+            }
+        }
+        stage("Security Scan") {
+            steps {
+                echo "Perform a security scan on the code using a tool to identify any vulnerabilities."
+                echo "ZAP (Zed Attack Proxy) is a popular open-source web application security scanner."
             }
             post {
                 success {
-                    emailext (
+                    emailext(
                         attachLog: true,
                         to: "chinsovatanakvichea@gmail.com",
-                        subject: "Unit and Integration Tests - SUCCESS",
-                        body: "Unit and Integration Test was successful."
+                        subject: "Build Status Email",
+                        body: "The file is safe to use.",
+                        
                     )
                 }
                 failure {
-                    emailext attachLog: true,
+                    emailext(
+                        attachLog: true,
                         to: "chinsovatanakvichea@gmail.com",
-                        subject: "Unit and Integration Tests - FAILURE",
-                        body: "Unit and Integration Test failed."
+                        subject: "Build Status Email",
+                        body: "Security issues found in the files presented.",
+                    )
                 }
             }
         }
-
-        stage('Code Analysis') {
+        stage("Deploy to Staging") {
             steps {
-                echo "Analyzing the code!"
-                echo "Tool: ESLint"
-                // Example command for ESLint (not executed here)
-                // sh 'npx eslint . --ext .js,.ts'
+                echo "Deploy the application to a staging server."
+                echo "Azure CLI is a command-line interface for Azure services, allowing deployment to Azure infrastructure."
             }
         }
-
-        stage('Security Scan') {
+        stage("Integration Tests on Staging") {
             steps {
-                echo "Scanning for potential security risks!"
-                echo "Tool: Trivy"
-                // Example command for Trivy (not executed here)
-                // sh 'trivy fs .'
+                echo "Run integration tests on the staging environment to ensure the application functions as expected in a production-like environment."
+                echo "Tools like JUnit and Selenium are again used after staging."
             }
             post {
                 success {
-                    emailext attachLog: true,
+                    emailext(
+                        attachLog: true,
                         to: "chinsovatanakvichea@gmail.com",
-                        subject: "Security Scan - SUCCESS",
-                        body: "Security scan was successful."
+                        subject: "Build Status Email",
+                        body: "Integration was successful.",
+                    )
                 }
                 failure {
-                    emailext attachLog: true,
+                    emailext(
+                        attachLog: true,
                         to: "chinsovatanakvichea@gmail.com",
-                        subject: "Security Scan - FAILURE",
-                        body: "Security scan failed."
+                        subject: "Build Status Email",
+                        body: "Integration was unsuccessful and something didn't work as expected.",
+                    )
                 }
             }
         }
-
-        stage('Deploy to Staging') {
+        stage("Deploy to Production") {
             steps {
-                echo "Deploying to staging"
-                echo "Tool: Custom deployment script"
-                // Example command for deployment (not executed here)
-                // sh 'deploy-script.sh staging'
+                echo "Deploy the application to a production server."
+                echo "Azure is also used in this stage. Aside from that, AWS and Ansible can also be used."
             }
-        }
-
-        stage('Integration Test on Staging') {
-            steps {
-                echo "Integration testing on staging"
-                echo "Tool: Custom integration test script"
-                // Example command for integration testing (not executed here)
-                // sh 'integration-tests.sh'
-            }
-        }
-
-        stage('Deploy to Production') {
-            steps {
-                echo "Deploying to production"
-                echo "Tool: Custom deployment script."
-                // Example command for production deployment (not executed here)
-                // sh 'deploy-script.sh production'
-            }
-        }
-    }
-
-    post {
-        success {
-            emailext attachLog: true,
-                to: "chinsovatanakvichea@gmail.com",
-                subject: "Pipeline Success",
-                body: "The pipeline has completed successfully."
-        }
-        failure {
-            emailext attachLog: true,
-                to: "chinsovatanakvichea@gmail.com",
-                subject: "Pipeline Failure",
-                body: "The pipeline has failed."
         }
     }
 }
